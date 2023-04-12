@@ -1,19 +1,20 @@
+const povrce = [
+  "Krumpir",
+  "Luk",
+  "Poriluk",
+  "Paradajz",
+  "Mrkva",
+  "Hren",
+  "Vlasac",
+  "Celer",
+  "Karfiol",
+  "Brokula",
+  "Češnjak",
+  "Peršin",
+];
+
 const getRandomName = () => {
-  const povrce = [
-    "Krumpir",
-    "Luk",
-    "Poriluk",
-    "Paradajz",
-    "Mrkva",
-    "Hren",
-    "Vlasac",
-    "Celer",
-    "Karfiol",
-    "Brokula",
-    "Češnjak",
-    "Peršin",
-  ];
-  return povrce[Math.floor(Math.random() * povrce.length)];
+ return povrce[Math.floor(Math.random() * povrce.length)];
 };
 
 const getRandomColor = () => {
@@ -37,6 +38,7 @@ drone.on("open", (error) => {
   const room = drone.subscribe("observable-room");
   room.on("open", (error) => {
     if (error) {
+      alert("Došlo je do greške")
       return console.error(error);
     }
     console.log("Successfully joined room");
@@ -49,6 +51,8 @@ drone.on("open", (error) => {
   });
 });
 
+
+
 const messages = document.querySelector(".chat-window");
 const message = document.querySelector(".message");
 const input = document.querySelector(".input");
@@ -56,8 +60,9 @@ const form = document.querySelector(".form");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const value = input.value;
-  if (value === "") {
+  const value = input.value.trim();
+  if (!value) {
+    alert("Poruka ne može biti prazna")
     return;
   }
   input.value = "";
@@ -66,6 +71,7 @@ form.addEventListener("submit", (event) => {
     message: value,
   });
 });
+
 
 const createMemberElement = (member) => {
   const { name, color } = member.clientData;
@@ -84,6 +90,7 @@ const createMessageElement = (text, member) => {
   message.appendChild(createMemberElement(member));
   message.appendChild(document.createTextNode(text));
   message.className = "message";
+  message.style.textAlign = member.id === drone.clientId ? "right" : "left";
   return message;
 };
 
@@ -96,3 +103,4 @@ const addMessage = (text, member) => {
   }
   el.scrollTop = el.scrollHeight;
 };
+
