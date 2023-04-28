@@ -52,6 +52,7 @@ const messages = document.querySelector(".chat-window");
 const message = document.querySelector(".message");
 const input = document.querySelector(".input");
 const form = document.querySelector(".form");
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const value = input.value.trim();
@@ -77,6 +78,7 @@ const createMemberElement = (member) => {
   avatar.style.backgroundColor = color;
   return user;
 };
+
 const createMessageElement = (text, member) => {
   const message = document.createElement("li");
   message.appendChild(createMemberElement(member));
