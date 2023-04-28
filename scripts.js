@@ -29,19 +29,16 @@ const drone = new ScaleDrone("YuGu4CDH1ZbqsCbu", {
 });
 
 const members = [];
-
 drone.on("open", (error) => {
   if (error) {
     return console.error(error);
   }
-  console.log("Successfully connected to Scaledrone");
   const room = drone.subscribe("observable-room");
   room.on("open", (error) => {
     if (error) {
       alert("Došlo je do greške")
       return console.error(error);
     }
-    console.log("Successfully joined room");
   });
 
   room.on("data", (text, member) => {
@@ -51,13 +48,10 @@ drone.on("open", (error) => {
   });
 });
 
-
-
 const messages = document.querySelector(".chat-window");
 const message = document.querySelector(".message");
 const input = document.querySelector(".input");
 const form = document.querySelector(".form");
-
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const value = input.value.trim();
@@ -72,7 +66,6 @@ form.addEventListener("submit", (event) => {
   });
 });
 
-
 const createMemberElement = (member) => {
   const { name, color } = member.clientData;
   const avatar = document.createElement("div");
@@ -84,7 +77,6 @@ const createMemberElement = (member) => {
   avatar.style.backgroundColor = color;
   return user;
 };
-
 const createMessageElement = (text, member) => {
   const message = document.createElement("li");
   message.appendChild(createMemberElement(member));
@@ -103,4 +95,3 @@ const addMessage = (text, member) => {
   }
   el.scrollTop = el.scrollHeight;
 };
-
