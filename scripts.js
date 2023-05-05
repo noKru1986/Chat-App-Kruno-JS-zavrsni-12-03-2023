@@ -30,6 +30,7 @@ const drone = new ScaleDrone("YuGu4CDH1ZbqsCbu", {
 
 drone.on("open", (error) => {
   if (error) {
+    alert("Stranica se ne može učitat");
     return console.error(error);
   }
   const room = drone.subscribe("observable-room");
