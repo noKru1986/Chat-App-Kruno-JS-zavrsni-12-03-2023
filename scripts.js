@@ -28,7 +28,6 @@ const drone = new ScaleDrone("YuGu4CDH1ZbqsCbu", {
   },
 });
 
-const members = [];
 drone.on("open", (error) => {
   if (error) {
     return console.error(error);
