@@ -14,7 +14,7 @@ const povrce = [
 ];
 
 const getRandomName = () => {
- return povrce[Math.floor(Math.random() * povrce.length)];
+  return povrce[Math.floor(Math.random() * povrce.length)];
 };
 
 const getRandomColor = () => {
@@ -36,7 +36,7 @@ drone.on("open", (error) => {
   const room = drone.subscribe("observable-room");
   room.on("open", (error) => {
     if (error) {
-      alert("Došlo je do greške")
+      alert("Došlo je do greške");
       return console.error(error);
     }
   });
@@ -57,7 +57,11 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   const value = input.value.trim();
   if (!value) {
-    alert("Poruka ne može biti prazna")
+    alert("Poruka ne može biti prazna");
+    return;
+  }
+  if (value.length > 12) {
+    alert("Poruka ne smije biti dulja od 12 znakova");
     return;
   }
   input.value = "";
